@@ -22,3 +22,6 @@
 - 서비스 추상화
 - Transaction
 - AOP
+- Mockito
+- Proxy Pattern
+- Decorator Pattern
