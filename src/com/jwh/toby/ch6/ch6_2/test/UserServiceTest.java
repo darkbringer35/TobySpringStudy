@@ -1,9 +1,9 @@
-package com.jwh.toby.ch6.ch6_1.test;
+package com.jwh.toby.ch6.ch6_2.test;
 
-import com.jwh.toby.ch6.ch6_1.dao.UserDao;
-import com.jwh.toby.ch6.ch6_1.domain.Level;
-import com.jwh.toby.ch6.ch6_1.domain.User;
-import com.jwh.toby.ch6.ch6_1.service.*;
+import com.jwh.toby.ch6.ch6_2.dao.UserDao;
+import com.jwh.toby.ch6.ch6_2.domain.Level;
+import com.jwh.toby.ch6.ch6_2.domain.User;
+import com.jwh.toby.ch6.ch6_2.service.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -57,6 +57,7 @@ public class UserServiceTest {
     public void upgradeLevels() throws Exception {
         userDao.deleteAll();
         for(User user : users) userDao.add(user);
+
         MockMailSender mockMailSender = new MockMailSender();
         UserLevelUpgradePolicyGeneral policy = (UserLevelUpgradePolicyGeneral) userLevelUpgradePolicy;
         policy.setMailSender(mockMailSender);

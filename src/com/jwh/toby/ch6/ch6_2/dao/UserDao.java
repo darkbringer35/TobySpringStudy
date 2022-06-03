@@ -1,6 +1,6 @@
-package com.jwh.toby.ch6.ch6_1.dao;
+package com.jwh.toby.ch6.ch6_2.dao;
 
-import com.jwh.toby.ch6.ch6_1.domain.User;
+import com.jwh.toby.ch6.ch6_2.domain.User;
 
 import java.util.List;
 
