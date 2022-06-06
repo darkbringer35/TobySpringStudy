@@ -1,8 +1,8 @@
-package com.jwh.toby.ch6.ch6_2.test;
+package com.jwh.toby.ch6.ch6_2.ch6_2_1.test;
 
-import com.jwh.toby.ch6.ch6_2.dao.UserDao;
-import com.jwh.toby.ch6.ch6_2.domain.Level;
-import com.jwh.toby.ch6.ch6_2.domain.User;
+import com.jwh.toby.ch6.ch6_2.ch6_2_1.domain.Level;
+import com.jwh.toby.ch6.ch6_2.ch6_2_1.dao.UserDao;
+import com.jwh.toby.ch6.ch6_2.ch6_2_1.domain.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -141,8 +141,8 @@ public class UserDaoTest {
         user1.setLogin(1000);
         user1.setRecommend(999);
 
-        int updateCount=userDao.update(user1);
-        assertThat(1, is(updateCount));
+//        int updateCount=userDao.update(user1);
+//        assertThat(1, is(updateCount));
 
         User user1update = userDao.get(user1.getId());
         checkSameUser(user1,user1update);

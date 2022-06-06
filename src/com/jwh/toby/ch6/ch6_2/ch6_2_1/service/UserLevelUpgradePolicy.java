@@ -1,6 +1,6 @@
-package com.jwh.toby.ch6.ch6_2.service;
+package com.jwh.toby.ch6.ch6_2.ch6_2_1.service;
 
-import com.jwh.toby.ch6.ch6_2.domain.User;
+import com.jwh.toby.ch6.ch6_2.ch6_2_1.domain.User;
 
 public interface UserLevelUpgradePolicy {
     public static final int MIN_LOGCOUNT_FOR_SILVER = 50;

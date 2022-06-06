@@ -10,14 +10,14 @@
         <property name="password" value="book" />
     </bean>
 
-    <bean id="mailSender" class="com.jwh.toby.ch6.ch6_2.service.DummyMailSender">
+    <bean id="mailSender" class="com.jwh.toby.ch6.ch6_2.ch6_2_4.service.DummyMailSender">
     </bean>
 
-    <bean id="userDao" class="com.jwh.toby.ch6.ch6_2.dao.UserDaoJdbc">
+    <bean id="userDao" class="com.jwh.toby.ch6.ch6_2.ch6_2_4.dao.UserDaoJdbc">
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-    <bean id="userLevelUpgradePolicy" class="com.jwh.toby.ch6.ch6_2.service.UserLevelUpgradePolicyGeneral">
+    <bean id="userLevelUpgradePolicy" class="com.jwh.toby.ch6.ch6_2.ch6_2_4.service.UserLevelUpgradePolicyGeneral">
         <property name="userDao" ref="userDao" />
         <property name="mailSender" ref="mailSender" />
     </bean>
@@ -27,12 +27,12 @@
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-    <bean id="userService" class="com.jwh.toby.ch6.ch6_2.service.UserServiceTx">
+    <bean id="userService" class="com.jwh.toby.ch6.ch6_2.ch6_2_4.service.UserServiceTx">
         <property name="userService" ref="userServiceImpl" />
         <property name="transactionManager" ref="transactionManager" />
     </bean>
 
-    <bean id="userServiceImpl" class="com.jwh.toby.ch6.ch6_2.service.UserServiceImpl">
+    <bean id="userServiceImpl" class="com.jwh.toby.ch6.ch6_2.ch6_2_4.service.UserServiceImpl">
         <property name="userDao" ref="userDao" />
         <property name="userLevelUpgradePolicy" ref="userLevelUpgradePolicy" />
     </bean>

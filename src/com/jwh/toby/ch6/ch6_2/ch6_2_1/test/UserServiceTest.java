@@ -1,21 +1,17 @@
-package com.jwh.toby.ch6.ch6_2.test;
+package com.jwh.toby.ch6.ch6_2.ch6_2_1.test;
 
-import com.jwh.toby.ch6.ch6_2.dao.UserDao;
-import com.jwh.toby.ch6.ch6_2.domain.Level;
-import com.jwh.toby.ch6.ch6_2.domain.User;
-import com.jwh.toby.ch6.ch6_2.service.*;
+import com.jwh.toby.ch6.ch6_2.ch6_2_1.domain.Level;
+import com.jwh.toby.ch6.ch6_2.ch6_2_1.service.*;
+import com.jwh.toby.ch6.ch6_2.ch6_2_1.dao.UserDao;
+import com.jwh.toby.ch6.ch6_2.ch6_2_1.domain.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailException;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -55,20 +51,25 @@ public class UserServiceTest {
 
     @Test
     public void upgradeLevels() throws Exception {
-        userDao.deleteAll();
-        for(User user : users) userDao.add(user);
+        UserLevelUpgradePolicyGeneral policy = new UserLevelUpgradePolicyGeneral();
 
-        MockMailSender mockMailSender = new MockMailSender();
-        UserLevelUpgradePolicyGeneral policy = (UserLevelUpgradePolicyGeneral) userLevelUpgradePolicy;
+        UserLevelUpgradePolicyTest.MockUserDao mockUserDao = new UserLevelUpgradePolicyTest.MockUserDao(this.users);
+        policy.setUserDao(mockUserDao);
+
+        UserLevelUpgradePolicyTest.MockMailSender mockMailSender = new UserLevelUpgradePolicyTest.MockMailSender();
         policy.setMailSender(mockMailSender);
 
-        userService.upgradeLevels();
+        UserServiceImpl userServiceImpl = new UserServiceImpl();
+        userServiceImpl.setUserDao(mockUserDao);
+        userServiceImpl.setUserLevelUpgradePolicy(policy);
 
-        checkLevelUpgraded(users.get(0), false);
-        checkLevelUpgraded(users.get(1), true);
-        checkLevelUpgraded(users.get(2), false);
-        checkLevelUpgraded(users.get(3), true);
-        checkLevelUpgraded(users.get(4), false);
+        userServiceImpl.upgradeLevels();
+
+        List<User> updated = mockUserDao.getUpdated();
+        assertThat(updated.size(),is(2));
+
+        UserLevelUpgradePolicyTest.checkUserAndLevel(updated.get(0),"joytouch",Level.SILVER);
+        UserLevelUpgradePolicyTest.checkUserAndLevel(updated.get(1),"madnite1",Level.GOLD);
 
         List<String> requests = mockMailSender.getRequests();
         assertThat(requests.size(),is(2));
@@ -145,23 +146,5 @@ public class UserServiceTest {
     }
 
     static class TestUserServiceException extends RuntimeException{
-    }
-
-    static class MockMailSender implements MailSender {
-        private List<String> requests =new ArrayList();
-
-        public List<String> getRequests(){
-            return requests;
-        }
-
-        @Override
-        public void send(SimpleMailMessage mailMessage) throws MailException {
-            requests.add(mailMessage.getTo()[0]);
-        }
-
-        @Override
-        public void send(SimpleMailMessage[] simpleMailMessages) throws MailException {
-
-        }
     }
 }

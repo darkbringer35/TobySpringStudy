@@ -1,6 +1,6 @@
-package com.jwh.toby.ch6.ch6_2.dao;
+package com.jwh.toby.ch6.ch6_2.ch6_2_4.dao;
 
-import com.jwh.toby.ch6.ch6_2.domain.User;
+import com.jwh.toby.ch6.ch6_2.ch6_2_4.domain.User;
 
 import java.util.List;
 
@@ -10,5 +10,5 @@ public interface UserDao {
     List<User> getAll();
     void deleteAll();
     int getCount();
-    int update(User user);
+    void update(User user);
 }

@@ -1,4 +1,4 @@
-package com.jwh.toby.ch6.ch6_2.domain;
+package com.jwh.toby.ch6.ch6_2.ch6_2_4.domain;
 
 public class User {
     private String id;

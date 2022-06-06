@@ -1,7 +1,7 @@
-package com.jwh.toby.ch6.ch6_2.test;
+package com.jwh.toby.ch6.ch6_2.ch6_2_1.test;
 
-import com.jwh.toby.ch6.ch6_2.domain.Level;
-import com.jwh.toby.ch6.ch6_2.domain.User;
+import com.jwh.toby.ch6.ch6_2.ch6_2_1.domain.Level;
+import com.jwh.toby.ch6.ch6_2.ch6_2_1.domain.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

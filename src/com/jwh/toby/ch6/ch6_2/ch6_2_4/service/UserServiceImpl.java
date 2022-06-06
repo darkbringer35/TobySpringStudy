@@ -1,8 +1,8 @@
-package com.jwh.toby.ch6.ch6_2.service;
+package com.jwh.toby.ch6.ch6_2.ch6_2_4.service;
 
-import com.jwh.toby.ch6.ch6_2.dao.UserDao;
-import com.jwh.toby.ch6.ch6_2.domain.Level;
-import com.jwh.toby.ch6.ch6_2.domain.User;
+import com.jwh.toby.ch6.ch6_2.ch6_2_4.dao.UserDao;
+import com.jwh.toby.ch6.ch6_2.ch6_2_4.domain.Level;
+import com.jwh.toby.ch6.ch6_2.ch6_2_4.domain.User;
 
 import java.util.List;
 

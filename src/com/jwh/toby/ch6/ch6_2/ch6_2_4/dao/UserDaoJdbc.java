@@ -1,7 +1,7 @@
-package com.jwh.toby.ch6.ch6_2.dao;
+package com.jwh.toby.ch6.ch6_2.ch6_2_4.dao;
 
-import com.jwh.toby.ch6.ch6_2.domain.Level;
-import com.jwh.toby.ch6.ch6_2.domain.User;
+import com.jwh.toby.ch6.ch6_2.ch6_2_4.domain.Level;
+import com.jwh.toby.ch6.ch6_2.ch6_2_4.domain.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -52,8 +52,8 @@ public class UserDaoJdbc implements UserDao {
     }
 
     @Override
-    public int update(User user) {
-        return this.jdbcTemplate.update("update users set name = ?, password = ?, level = ?, login = ?, " +
+    public void update(User user) {
+        this.jdbcTemplate.update("update users set name = ?, password = ?, level = ?, login = ?, " +
                                         "recommend = ? where id = ?", user.getName(), user.getPassword(),
                                         user.getLevel().intValue(), user.getLogin(), user.getRecommend(),
                                         user.getId());

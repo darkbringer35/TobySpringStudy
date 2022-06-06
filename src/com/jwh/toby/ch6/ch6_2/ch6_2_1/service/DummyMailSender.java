@@ -1,4 +1,4 @@
-package com.jwh.toby.ch6.ch6_2.service;
+package com.jwh.toby.ch6.ch6_2.ch6_2_1.service;
 
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
