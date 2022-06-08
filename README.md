@@ -27,3 +27,4 @@
 - Reflection
 - Proxy Pattern
 - Decorator Pattern
+- Dynamic Proxy
