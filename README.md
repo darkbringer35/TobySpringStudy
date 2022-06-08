@@ -24,5 +24,6 @@
 - Transaction
 - AOP
 - Mockito
+- Reflection
 - Proxy Pattern
 - Decorator Pattern
