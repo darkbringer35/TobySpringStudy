@@ -13,7 +13,7 @@ public class UserDao {
     private DataSource dataSource;
     private JdbcContext jdbcContext;
 
-    public void setDataSource(DataSource dataSource){
+    public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
         jdbcContext = new JdbcContext();
         jdbcContext.setDataSource(this.dataSource);
@@ -46,7 +46,7 @@ public class UserDao {
         ResultSet rs = ps.executeQuery();
 
         User user = null;
-        if(rs.next()) {
+        if (rs.next()) {
             user = new User();
             user.setId(rs.getString("id"));
             user.setName(rs.getString("name"));
@@ -57,23 +57,23 @@ public class UserDao {
         ps.close();
         conn.close();
 
-        if(user == null)
+        if (user == null)
             throw new EmptyResultDataAccessException(1);
 
         return user;
     }
 
     //템플릿/콜백 패턴
-    public void deleteAll() throws SQLException{
+    public void deleteAll() throws SQLException {
         jdbcContext.executeSql("DELETE FROM users");
     }
 
-    public int getCount() throws SQLException{
+    public int getCount() throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        try{
+        try {
             conn = dataSource.getConnection();
 
             ps = conn.prepareStatement("SELECT COUNT(*) FROM users");
@@ -81,27 +81,27 @@ public class UserDao {
             rs = ps.executeQuery();
             rs.next();
             return rs.getInt(1);
-        }catch(SQLException e){
+        } catch (SQLException e) {
             throw e;
-        }finally {
-            if(rs != null){
-                try{
+        } finally {
+            if (rs != null) {
+                try {
                     rs.close();
-                }catch(SQLException e){
+                } catch (SQLException e) {
 
                 }
             }
-            if(ps != null){
-                try{
+            if (ps != null) {
+                try {
                     ps.close();
-                }catch(SQLException e){
+                } catch (SQLException e) {
 
                 }
             }
-            if(conn != null){
-                try{
+            if (conn != null) {
+                try {
                     conn.close();
-                }catch(SQLException e){
+                } catch (SQLException e) {
 
                 }
             }

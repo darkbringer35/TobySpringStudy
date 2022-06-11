@@ -1,7 +1,6 @@
 package com.jwh.toby.ch1.ch1_4.ch1_4_2.dao;
 
 import com.jwh.toby.ch1.ch1_4.ch1_4_2.domain.Message;
-import com.jwh.toby.ch1.ch1_4.ch1_4_2.domain.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +10,7 @@ import java.sql.SQLException;
 public class MessageDao {
     private final ConnectionMaker connectionMaker;
 
-    public MessageDao(ConnectionMaker connectionMaker){
+    public MessageDao(ConnectionMaker connectionMaker) {
         this.connectionMaker = connectionMaker;
     }
 

@@ -31,7 +31,7 @@ public class UserDaoJdbcTest {
         assertThat(user2.getPassword(), is(user.getPassword()));
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         JUnitCore.main("com.jwh.toby.ch2.ch2_2.UserDaoTest");
     }
 }

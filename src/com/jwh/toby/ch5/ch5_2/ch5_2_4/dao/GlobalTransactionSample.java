@@ -1,12 +1,9 @@
 package com.jwh.toby.ch5.ch5_2.ch5_2_4.dao;
 
-import org.springframework.transaction.jta.UserTransactionAdapter;
-
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class GlobalTransactionSample {
@@ -19,12 +16,12 @@ public class GlobalTransactionSample {
 
         //tx.begin();   /*2.트랜잭션 시작*/
         Connection c = dataSource.getConnection();  /*JNDI로 가져온 dataSource를 사용해야 한다.*/
-        try{
+        try {
             /*3. DAO 메소드 호출*/
             //tx.commit(); /*4. 트랜잭션 커밋*/
-        }catch(Exception e) {
+        } catch (Exception e) {
             //tx.rollback(); /*5. 트랜잭션 롤백*/
-        }finally {
+        } finally {
             c.close(); /*6. DB Connection 종료*/
         }
     }

@@ -14,8 +14,8 @@ public class UserDaoTest {
         //애플리케이션 컨텍스트에 설정 정보 등록후 빈 오브젝트 생성
         ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
         //단순하게 bean 이름만 넣으면 Object 타입이 반환되기 때문에 반환된 클래스 타입을 인자로 넣어준다.
-        UserDao userDao = context.getBean("userDao",UserDao.class);
-        MessageDao messsageDao = context.getBean("messageDao",MessageDao.class);
+        UserDao userDao = context.getBean("userDao", UserDao.class);
+        MessageDao messsageDao = context.getBean("messageDao", MessageDao.class);
 
         User user = new User();
         user.setId("whiteship");

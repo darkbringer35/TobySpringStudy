@@ -11,8 +11,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.sql.SQLException;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -26,10 +24,10 @@ public class UserDaoJdbcTest {
     private User user3;
 
     @Before
-    public void setUp(){
-        this.user1 = new User("gyumee","박성철","springno1");
-        this.user2 = new User("leegw700","이길원","springno2");
-        this.user3 = new User("bumjin","박범진","springno3");
+    public void setUp() {
+        this.user1 = new User("gyumee", "박성철", "springno1");
+        this.user2 = new User("leegw700", "이길원", "springno2");
+        this.user3 = new User("bumjin", "박범진", "springno3");
     }
 
     @Test
@@ -69,7 +67,7 @@ public class UserDaoJdbcTest {
         assertThat(user2.getPassword(), is(user1.getPassword()));
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         JUnitCore.main("com.jwh.toby.ch3.ch3_6.ch3_6_3.UserDaoTest");
     }
 }

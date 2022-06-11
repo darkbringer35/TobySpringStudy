@@ -15,13 +15,13 @@ import static org.junit.Assert.assertThat;
 
 public class UserDaoJdbcTest {
     @Test
-    public void count() throws SQLException{
+    public void count() throws SQLException {
         ApplicationContext context = new GenericXmlApplicationContext("com/jwh/toby/ch2/ch2_3/ch2_3_3/applicationContext.xml");
         UserDao userDao = context.getBean("userDao", UserDao.class);
 
-        User user1 = new User("gyumee","박성철","springno1");
-        User user2 = new User("leegw700","이길원","springno2");
-        User user3 = new User("bumjin","박범진","springno3");
+        User user1 = new User("gyumee", "박성철", "springno1");
+        User user2 = new User("leegw700", "이길원", "springno2");
+        User user3 = new User("bumjin", "박범진", "springno3");
 
         userDao.deleteAll();
         assertThat(userDao.getCount(), is(0));
@@ -70,7 +70,7 @@ public class UserDaoJdbcTest {
         assertThat(user2.getPassword(), is(user.getPassword()));
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         JUnitCore.main("com.jwh.toby.ch2.ch2_3.ch2_3_3.UserDaoTest");
     }
 }

@@ -6,12 +6,13 @@ import java.sql.*;
 
 //1.connection 객체의 생성 부분의 함수화
 public class UserDao {
-    private Connection getConntection() throws ClassNotFoundException, SQLException{
+    private Connection getConntection() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver"); // jdbc driver 클래스 동적 로딩
         Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/springbook?characterEncoding=UTF-8","spring","book");
+                "jdbc:mysql://localhost:3306/springbook?characterEncoding=UTF-8", "spring", "book");
         return conn;
     }
+
     public void add(User user) throws ClassNotFoundException, SQLException {
         Connection conn = getConntection();
         PreparedStatement ps = conn.prepareCall(

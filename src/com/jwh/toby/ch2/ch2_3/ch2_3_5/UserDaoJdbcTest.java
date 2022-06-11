@@ -19,17 +19,18 @@ public class UserDaoJdbcTest {
     private User user1;
     private User user2;
     private User user3;
+
     @Before
-    public void setUp(){
+    public void setUp() {
         ApplicationContext context = new GenericXmlApplicationContext("com/jwh/toby/ch2/ch2_3/ch2_3_5/applicationContext.xml");
         userDao = context.getBean("userDao", UserDao.class);
-        this.user1 = new User("gyumee","박성철","springno1");
-        this.user2 = new User("leegw700","이길원","springno2");
-        this.user3 = new User("bumjin","박범진","springno3");
+        this.user1 = new User("gyumee", "박성철", "springno1");
+        this.user2 = new User("leegw700", "이길원", "springno2");
+        this.user3 = new User("bumjin", "박범진", "springno3");
     }
 
     @Test
-    public void count() throws SQLException{
+    public void count() throws SQLException {
         userDao.deleteAll();
         assertThat(userDao.getCount(), is(0));
 
@@ -65,7 +66,7 @@ public class UserDaoJdbcTest {
         assertThat(user2.getPassword(), is(user1.getPassword()));
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         JUnitCore.main("com.jwh.toby.ch2.ch2_3.ch2_3_5.UserDaoTest");
     }
 }

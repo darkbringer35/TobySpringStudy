@@ -13,11 +13,11 @@ import java.util.List;
 public class UserDaoJdbc implements UserDao {
     private JdbcTemplate jdbcTemplate;
 
-    public void setDataSource(DataSource dataSource){
+    public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    private RowMapper<User> userMapper =
+    private final RowMapper<User> userMapper =
             new RowMapper<User>() {
                 @Override
                 public User mapRow(ResultSet rs, int i) throws SQLException {
@@ -33,7 +33,7 @@ public class UserDaoJdbc implements UserDao {
             };
 
     public void add(final User user) {
-        jdbcTemplate.update("insert into users(id,name,password,level,login,recommend) values(?,?,?,?,?,?)",user.getId(),user.getName(),user.getPassword(),user.getLevel().intValue(),user.getLogin(),user.getRecommend());
+        jdbcTemplate.update("insert into users(id,name,password,level,login,recommend) values(?,?,?,?,?,?)", user.getId(), user.getName(), user.getPassword(), user.getLevel().intValue(), user.getLogin(), user.getRecommend());
     }
 
     public User get(String id) {
@@ -53,12 +53,12 @@ public class UserDaoJdbc implements UserDao {
     @Override
     public int update(User user) {
         return this.jdbcTemplate.update("update users set name = ?, password = ?, level = ?, login = ?, " +
-                                        "recommend = ? where id = ?", user.getName(), user.getPassword(),
-                                        user.getLevel().intValue(), user.getLogin(), user.getRecommend(),
-                                        user.getId());
+                        "recommend = ? where id = ?", user.getName(), user.getPassword(),
+                user.getLevel().intValue(), user.getLogin(), user.getRecommend(),
+                user.getId());
     }
 
-    public List<User> getAll(){
+    public List<User> getAll() {
         return jdbcTemplate.query("SELECT * FROM users ORDER BY id",
                 userMapper);
     }

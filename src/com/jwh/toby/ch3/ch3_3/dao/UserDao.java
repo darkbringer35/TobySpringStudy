@@ -16,7 +16,7 @@ public class UserDao {
         this.dataSource = dataSource;
     }
 
-    public void jdbcContextWithStatementStrategy(StatementStrategy stmt) throws SQLException{
+    public void jdbcContextWithStatementStrategy(StatementStrategy stmt) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
@@ -24,21 +24,21 @@ public class UserDao {
             conn = dataSource.getConnection();
             ps = stmt.makePreparedStatememt(conn);
             ps.executeUpdate();
-        }catch(SQLException e){
+        } catch (SQLException e) {
             throw e;
         } finally {
             if (ps != null) {
                 try {
                     ps.close();
-                } catch(SQLException e){
+                } catch (SQLException e) {
 
                 }
             }
 
-            if(conn != null){
+            if (conn != null) {
                 try {
                     conn.close();
-                } catch(SQLException e){
+                } catch (SQLException e) {
 
                 }
             }
@@ -47,7 +47,7 @@ public class UserDao {
 
     public void add(final User user) throws SQLException {
         //로컬 클래스
-        class AddStatement implements StatementStrategy{
+        class AddStatement implements StatementStrategy {
             @Override
             public PreparedStatement makePreparedStatememt(Connection c) throws SQLException {
                 PreparedStatement ps = c.prepareCall(
@@ -72,7 +72,7 @@ public class UserDao {
         ResultSet rs = ps.executeQuery();
 
         User user = null;
-        if(rs.next()) {
+        if (rs.next()) {
             user = new User();
             user.setId(rs.getString("id"));
             user.setName(rs.getString("name"));
@@ -83,30 +83,30 @@ public class UserDao {
         ps.close();
         conn.close();
 
-        if(user == null)
+        if (user == null)
             throw new EmptyResultDataAccessException(1);
 
         return user;
     }
 
-    public void deleteAll() throws SQLException{
+    public void deleteAll() throws SQLException {
         //익명 내부 클래스
         jdbcContextWithStatementStrategy(
-            new StatementStrategy() {
-                @Override
-                public PreparedStatement makePreparedStatememt(Connection c) throws SQLException {
-                    return c.prepareStatement("DELETE FROM users");
+                new StatementStrategy() {
+                    @Override
+                    public PreparedStatement makePreparedStatememt(Connection c) throws SQLException {
+                        return c.prepareStatement("DELETE FROM users");
+                    }
                 }
-            }
         );
     }
 
-    public int getCount() throws SQLException{
+    public int getCount() throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        try{
+        try {
             conn = dataSource.getConnection();
 
             ps = conn.prepareStatement("SELECT COUNT(*) FROM users");
@@ -114,27 +114,27 @@ public class UserDao {
             rs = ps.executeQuery();
             rs.next();
             return rs.getInt(1);
-        }catch(SQLException e){
+        } catch (SQLException e) {
             throw e;
-        }finally {
-            if(rs != null){
-                try{
+        } finally {
+            if (rs != null) {
+                try {
                     rs.close();
-                }catch(SQLException e){
+                } catch (SQLException e) {
 
                 }
             }
-            if(ps != null){
-                try{
+            if (ps != null) {
+                try {
                     ps.close();
-                }catch(SQLException e){
+                } catch (SQLException e) {
 
                 }
             }
-            if(conn != null){
-                try{
+            if (conn != null) {
+                try {
                     conn.close();
-                }catch(SQLException e){
+                } catch (SQLException e) {
 
                 }
             }

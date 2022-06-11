@@ -8,19 +8,24 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 
 import javax.sql.DataSource;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 
-public class UserService{
+public class UserService {
     private UserDao userDao;
     private DataSource dataSource;
     private UserLevelUpgradePolicy userLevelUpgradePolicy;
 
-    public void setDataSource(DataSource dataSource){
-        this.dataSource=dataSource;
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
-    public void setUserDao(UserDao userDao){ this.userDao = userDao;}
-    public void setUserLevelUpgradePolicy(UserLevelUpgradePolicy userLevelUpgradePolicy){this.userLevelUpgradePolicy = userLevelUpgradePolicy;}
+
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+    public void setUserLevelUpgradePolicy(UserLevelUpgradePolicy userLevelUpgradePolicy) {
+        this.userLevelUpgradePolicy = userLevelUpgradePolicy;
+    }
 
     public void upgradeLevels() throws Exception {
         TransactionSynchronizationManager.initSynchronization();
@@ -34,18 +39,18 @@ public class UserService{
                     userLevelUpgradePolicy.upgradeLevel(user);
             }
             c.commit();
-        }catch(Exception e){
+        } catch (Exception e) {
             c.rollback();
             throw e;
         } finally {
-            DataSourceUtils.releaseConnection(c,dataSource);
+            DataSourceUtils.releaseConnection(c, dataSource);
             TransactionSynchronizationManager.unbindResource(this.dataSource);
             TransactionSynchronizationManager.clearSynchronization();
         }
     }
 
-    public void add(User user){
-        if(user.getLevel() == null) user.setLevel(Level.BASIC);
+    public void add(User user) {
+        if (user.getLevel() == null) user.setLevel(Level.BASIC);
         userDao.add(user);
     }
 }

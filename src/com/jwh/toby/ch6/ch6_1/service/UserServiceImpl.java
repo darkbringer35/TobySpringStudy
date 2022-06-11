@@ -10,10 +10,11 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
     private UserLevelUpgradePolicy userLevelUpgradePolicy;
 
-    public void setUserDao(UserDao userDao){
+    public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
-    public void setUserLevelUpgradePolicy(UserLevelUpgradePolicy userLevelUpgradePolicy){
+
+    public void setUserLevelUpgradePolicy(UserLevelUpgradePolicy userLevelUpgradePolicy) {
         this.userLevelUpgradePolicy = userLevelUpgradePolicy;
     }
 
@@ -25,8 +26,8 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public void add(User user){
-        if(user.getLevel() == null) user.setLevel(Level.BASIC);
+    public void add(User user) {
+        if (user.getLevel() == null) user.setLevel(Level.BASIC);
         userDao.add(user);
     }
 }

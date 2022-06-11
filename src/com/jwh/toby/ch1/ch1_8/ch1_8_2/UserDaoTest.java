@@ -4,7 +4,6 @@ import com.jwh.toby.ch1.ch1_8.ch1_8_2.dao.CountingConnectionMaker;
 import com.jwh.toby.ch1.ch1_8.ch1_8_2.dao.UserDao;
 import com.jwh.toby.ch1.ch1_8.ch1_8_2.domain.User;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import java.sql.SQLException;

@@ -13,23 +13,23 @@ public class CalcSumTest {
     String numFilePath;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         this.calculator = new Calculator();
         this.numFilePath = getClass().getResource("numbers.txt").getPath();
     }
 
     @Test
-    public void sumOfNumbers() throws IOException{
-        assertThat(calculator.calcSum(numFilePath),is(10));
+    public void sumOfNumbers() throws IOException {
+        assertThat(calculator.calcSum(numFilePath), is(10));
     }
 
     @Test
-    public void multiplyOfNumbers() throws IOException{
-        assertThat(calculator.calcMultiply(numFilePath),is(24));
+    public void multiplyOfNumbers() throws IOException {
+        assertThat(calculator.calcMultiply(numFilePath), is(24));
     }
 
     @Test
-    public void concatenateStrings() throws IOException{
-        assertThat(calculator.concatenate(numFilePath),is("1234"));
+    public void concatenateStrings() throws IOException {
+        assertThat(calculator.concatenate(numFilePath), is("1234"));
     }
 }

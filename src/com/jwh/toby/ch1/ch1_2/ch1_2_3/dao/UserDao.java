@@ -2,7 +2,10 @@ package com.jwh.toby.ch1.ch1_2.ch1_2_3.dao;
 
 import com.jwh.toby.ch1.ch1_2.ch1_2_3.domain.User;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 //UserDao의 파생에 대비해서 추상화한다.
 public abstract class UserDao {

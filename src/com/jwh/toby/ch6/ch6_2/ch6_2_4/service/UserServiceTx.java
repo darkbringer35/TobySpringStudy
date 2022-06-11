@@ -9,7 +9,7 @@ public class UserServiceTx implements UserService {
     private UserService userService;
     private PlatformTransactionManager transactionManager;
 
-    public void setUserService(UserService userService){
+    public void setUserService(UserService userService) {
         this.userService = userService;
     }
 
@@ -31,7 +31,7 @@ public class UserServiceTx implements UserService {
 
     }
 
-    public void add(User user){
+    public void add(User user) {
         userService.add(user);
     }
 }

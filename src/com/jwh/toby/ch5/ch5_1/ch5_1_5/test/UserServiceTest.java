@@ -31,23 +31,23 @@ public class UserServiceTest {
     @Before
     public void setUp() {
         users = Arrays.asList(
-                new User("bumjin","박범진","p1", Level.BASIC, UserLevelUpgradePolicy.MIN_LOGCOUNT_FOR_SILVER-1,0),
-                new User("joytouch","강명성","p2", Level.BASIC, UserLevelUpgradePolicy.MIN_LOGCOUNT_FOR_SILVER,0),
-                new User("erwins","신승한","p3", Level.SILVER,60, UserLevelUpgradePolicy.MIN_RECOMMEND_FOR_GOLD-1),
-                new User("madnite1","이승한","p4", Level.SILVER,60, UserLevelUpgradePolicy.MIN_RECOMMEND_FOR_GOLD),
-                new User("green","오민규","p5", Level.GOLD,Integer.MAX_VALUE, Integer.MAX_VALUE)
+                new User("bumjin", "박범진", "p1", Level.BASIC, UserLevelUpgradePolicy.MIN_LOGCOUNT_FOR_SILVER - 1, 0),
+                new User("joytouch", "강명성", "p2", Level.BASIC, UserLevelUpgradePolicy.MIN_LOGCOUNT_FOR_SILVER, 0),
+                new User("erwins", "신승한", "p3", Level.SILVER, 60, UserLevelUpgradePolicy.MIN_RECOMMEND_FOR_GOLD - 1),
+                new User("madnite1", "이승한", "p4", Level.SILVER, 60, UserLevelUpgradePolicy.MIN_RECOMMEND_FOR_GOLD),
+                new User("green", "오민규", "p5", Level.GOLD, Integer.MAX_VALUE, Integer.MAX_VALUE)
         );
     }
 
     @Test
-    public void bean(){
-        assertThat(this.userService , is(notNullValue()));
+    public void bean() {
+        assertThat(this.userService, is(notNullValue()));
     }
 
     @Test
     public void upgradeLevels() {
         userDao.deleteAll();
-        for(User user : users) userDao.add(user);
+        for (User user : users) userDao.add(user);
 
         userService.upgradeLevels();
 
@@ -76,9 +76,9 @@ public class UserServiceTest {
         assertThat(userWithoutLevelRead.getLevel(), is(userWithoutLevel.getLevel()));
     }
 
-    public void checkLevelUpgraded(User user, boolean upgraded){
+    public void checkLevelUpgraded(User user, boolean upgraded) {
         User userUpdate = userDao.get(user.getId());
-        if(upgraded)
+        if (upgraded)
             assertThat(userUpdate.getLevel(), is(user.getLevel().nextLevel()));
         else
             assertThat(userUpdate.getLevel(), is(user.getLevel()));

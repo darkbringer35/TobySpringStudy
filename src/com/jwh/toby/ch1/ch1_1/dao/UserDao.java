@@ -12,13 +12,13 @@ public class UserDao {
     public void add(User user) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver"); // jdbc driver 클래스 동적 로딩
         Connection conn = DriverManager.getConnection(
-          "jdbc:mysql://localhost:3306/springbook?characterEncoding=UTF-8","spring","book");
+                "jdbc:mysql://localhost:3306/springbook?characterEncoding=UTF-8", "spring", "book");
 
         PreparedStatement ps = conn.prepareCall(
                 "insert into users(id,name,password) values(?,?,?)");
         ps.setString(1, user.getId());
-        ps.setString(2,user.getName());
-        ps.setString(3,user.getPassword());
+        ps.setString(2, user.getName());
+        ps.setString(3, user.getPassword());
 
         ps.executeUpdate();
 
@@ -29,7 +29,7 @@ public class UserDao {
     public User get(String id) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver"); // jdbc driver 클래스 동적 로딩
         Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/springbook?characterEncoding=UTF-8","spring","book");
+                "jdbc:mysql://localhost:3306/springbook?characterEncoding=UTF-8", "spring", "book");
 
         PreparedStatement ps = conn
                 .prepareStatement("select * from users where id = ?");

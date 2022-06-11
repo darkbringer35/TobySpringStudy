@@ -34,10 +34,10 @@ public class UserDaoTest {
     private User user3;
 
     @Before
-    public void setUp(){
-        this.user1 = new User("gyumee","박성철","springno1", Level.BASIC,1,0);
-        this.user2 = new User("leegw700","이길원","springno2", Level.SILVER,55,10);
-        this.user3 = new User("bumjin","박범진","springno3", Level.GOLD,100,40);
+    public void setUp() {
+        this.user1 = new User("gyumee", "박성철", "springno1", Level.BASIC, 1, 0);
+        this.user2 = new User("leegw700", "이길원", "springno2", Level.SILVER, 55, 10);
+        this.user3 = new User("bumjin", "박범진", "springno3", Level.GOLD, 100, 40);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class UserDaoTest {
     }
 
     @Test(expected = EmptyResultDataAccessException.class)
-    public void getUserFailure()  {
+    public void getUserFailure() {
         userDao.deleteAll();
         assertThat(userDao.getCount(), is(0));
 
@@ -73,40 +73,40 @@ public class UserDaoTest {
         assertThat(userDao.getCount(), is(2));
 
         User userget1 = userDao.get(user1.getId());
-        checkSameUser(userget1,user1);
+        checkSameUser(userget1, user1);
 
         User userget2 = userDao.get(user2.getId());
-        checkSameUser(userget2,user2);
+        checkSameUser(userget2, user2);
     }
 
     @Test
-    public void getAll(){
+    public void getAll() {
         userDao.deleteAll();
 
         List<User> users0 = userDao.getAll();
-        assertThat(users0.size(),is(0));
+        assertThat(users0.size(), is(0));
 
         userDao.add(user1);
         List<User> users1 = userDao.getAll();
-        assertThat(users1.size(),is(1));
-        checkSameUser(user1,users1.get(0));
+        assertThat(users1.size(), is(1));
+        checkSameUser(user1, users1.get(0));
 
         userDao.add(user2);
         List<User> users2 = userDao.getAll();
-        assertThat(users2.size(),is(2));
-        checkSameUser(user1,users2.get(0));
-        checkSameUser(user2,users2.get(1));
+        assertThat(users2.size(), is(2));
+        checkSameUser(user1, users2.get(0));
+        checkSameUser(user2, users2.get(1));
 
         userDao.add(user3);
         List<User> users3 = userDao.getAll();
-        assertThat(users3.size(),is(3));
-        checkSameUser(user3,users3.get(0)); //orderBy 결과를 맞추기 위해
-        checkSameUser(user1,users3.get(1));
-        checkSameUser(user2,users3.get(2));
+        assertThat(users3.size(), is(3));
+        checkSameUser(user3, users3.get(0)); //orderBy 결과를 맞추기 위해
+        checkSameUser(user1, users3.get(1));
+        checkSameUser(user2, users3.get(2));
     }
 
     @Test(expected = DataAccessException.class)
-    public void duplicateKey(){
+    public void duplicateKey() {
         userDao.deleteAll();
 
         userDao.add(user1);
@@ -114,22 +114,21 @@ public class UserDaoTest {
     }
 
     @Test
-    public void sqlExceptionTranslate(){
+    public void sqlExceptionTranslate() {
         userDao.deleteAll();
 
-        try{
+        try {
             userDao.add(user1);
             userDao.add(user1);
-        }
-        catch (DuplicateKeyException ex){
+        } catch (DuplicateKeyException ex) {
             SQLException sqlEx = (SQLException) ex.getRootCause();
             SQLExceptionTranslator set = new SQLErrorCodeSQLExceptionTranslator(this.dataSource);
-            assertThat(set.translate(null,null, sqlEx),is(DuplicateKeyException.class));
+            assertThat(set.translate(null, null, sqlEx), is(DuplicateKeyException.class));
         }
     }
 
     @Test
-    public void update(){
+    public void update() {
         userDao.deleteAll();
 
         userDao.add(user1);
@@ -141,21 +140,21 @@ public class UserDaoTest {
         user1.setLogin(1000);
         user1.setRecommend(999);
 
-        int updateCount=userDao.update(user1);
+        int updateCount = userDao.update(user1);
         assertThat(1, is(updateCount));
 
         User user1update = userDao.get(user1.getId());
-        checkSameUser(user1,user1update);
+        checkSameUser(user1, user1update);
         User user2update = userDao.get(user2.getId());
-        checkSameUser(user2,user2update);
+        checkSameUser(user2, user2update);
     }
 
-    private void checkSameUser(User user1, User user2){
+    private void checkSameUser(User user1, User user2) {
         assertThat(user1.getId(), is(user2.getId()));
         assertThat(user1.getName(), is(user2.getName()));
         assertThat(user1.getPassword(), is(user2.getPassword()));
-        assertThat(user1.getLevel(),is(user2.getLevel()));
-        assertThat(user1.getLogin(),is(user2.getLogin()));
-        assertThat(user1.getRecommend(),is(user2.getRecommend()));
+        assertThat(user1.getLevel(), is(user2.getLevel()));
+        assertThat(user1.getLogin(), is(user2.getLogin()));
+        assertThat(user1.getRecommend(), is(user2.getRecommend()));
     }
 }

@@ -13,11 +13,11 @@ public class UserDao {
     //dataSource는 jdbcTemplate에 적용하고 사용할 일이 없으니 저장할 필요없다.
     private JdbcTemplate jdbcTemplate;
 
-    public void setDataSource(DataSource dataSource){
+    public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    private RowMapper<User> userMapper =
+    private final RowMapper<User> userMapper =
             new RowMapper<User>() {
                 @Override
                 public User mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -30,7 +30,7 @@ public class UserDao {
             };
 
     public void add(final User user) {
-        jdbcTemplate.update("insert into users(id,name,password) values(?,?,?)",user.getId(),user.getName(),user.getPassword());
+        jdbcTemplate.update("insert into users(id,name,password) values(?,?,?)", user.getId(), user.getName(), user.getPassword());
     }
 
     public User get(String id) {
@@ -47,7 +47,7 @@ public class UserDao {
         return jdbcTemplate.queryForInt("SELECT COUNT(*) FROM users");
     }
 
-    public List<User> getAll(){
+    public List<User> getAll() {
         return jdbcTemplate.query("SELECT * FROM users ORDER BY id",
                 userMapper);
     }

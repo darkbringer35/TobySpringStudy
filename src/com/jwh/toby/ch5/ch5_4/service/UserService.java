@@ -3,25 +3,25 @@ package com.jwh.toby.ch5.ch5_4.service;
 import com.jwh.toby.ch5.ch5_4.dao.UserDao;
 import com.jwh.toby.ch5.ch5_4.domain.Level;
 import com.jwh.toby.ch5.ch5_4.domain.User;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.util.List;
 
-public class UserService{
+public class UserService {
     private UserDao userDao;
     private UserLevelUpgradePolicy userLevelUpgradePolicy;
     private PlatformTransactionManager transactionManager;
 
-    public void setUserDao(UserDao userDao){
+    public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
-    public void setUserLevelUpgradePolicy(UserLevelUpgradePolicy userLevelUpgradePolicy){
+
+    public void setUserLevelUpgradePolicy(UserLevelUpgradePolicy userLevelUpgradePolicy) {
         this.userLevelUpgradePolicy = userLevelUpgradePolicy;
     }
+
     public void setTransactionManager(PlatformTransactionManager transactionManager) {
         this.transactionManager = transactionManager;
     }
@@ -42,8 +42,8 @@ public class UserService{
         }
     }
 
-    public void add(User user){
-        if(user.getLevel() == null) user.setLevel(Level.BASIC);
+    public void add(User user) {
+        if (user.getLevel() == null) user.setLevel(Level.BASIC);
         userDao.add(user);
     }
 }

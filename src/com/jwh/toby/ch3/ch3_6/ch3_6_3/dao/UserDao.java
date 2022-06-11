@@ -1,13 +1,10 @@
 package com.jwh.toby.ch3.ch3_6.ch3_6_3.dao;
 
 import com.jwh.toby.ch3.ch3_6.ch3_6_3.domain.User;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -15,13 +12,13 @@ public class UserDao {
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
 
-    public void setDataSource(DataSource dataSource){
+    public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     public void add(final User user) {
-        jdbcTemplate.update("insert into users(id,name,password) values(?,?,?)",user.getId(),user.getName(),user.getPassword());
+        jdbcTemplate.update("insert into users(id,name,password) values(?,?,?)", user.getId(), user.getName(), user.getPassword());
     }
 
     public User get(String id) {

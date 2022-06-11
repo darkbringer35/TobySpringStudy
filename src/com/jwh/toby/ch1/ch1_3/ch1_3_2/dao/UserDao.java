@@ -12,7 +12,7 @@ public class UserDao {
     //또한 클래스 간의 종속성을 제거하기 위해 인터페이스를 도입
     private final ConnectionMaker connectionMaker;
 
-    public UserDao(){
+    public UserDao() {
         this.connectionMaker = new NConnectionMaker();
     }
 

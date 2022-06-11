@@ -9,14 +9,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UserDaoJdbc implements UserDao{
+public class UserDaoJdbc implements UserDao {
     private JdbcTemplate jdbcTemplate;
 
-    public void setDataSource(DataSource dataSource){
+    public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    private RowMapper<User> userMapper =
+    private final RowMapper<User> userMapper =
             new RowMapper<User>() {
                 @Override
                 public User mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -29,7 +29,7 @@ public class UserDaoJdbc implements UserDao{
             };
 
     public void add(final User user) {
-        jdbcTemplate.update("insert into users(id,name,password) values(?,?,?)",user.getId(),user.getName(),user.getPassword());
+        jdbcTemplate.update("insert into users(id,name,password) values(?,?,?)", user.getId(), user.getName(), user.getPassword());
     }
 
     public User get(String id) {
@@ -46,7 +46,7 @@ public class UserDaoJdbc implements UserDao{
         return jdbcTemplate.queryForInt("SELECT COUNT(*) FROM users");
     }
 
-    public List<User> getAll(){
+    public List<User> getAll() {
         return jdbcTemplate.query("SELECT * FROM users ORDER BY id",
                 userMapper);
     }

@@ -5,54 +5,56 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Calculator {
-    public Integer fileReadTemplate(String filePath, BufferedReaderCallback callback) throws IOException{
+    public Integer fileReadTemplate(String filePath, BufferedReaderCallback callback) throws IOException {
         BufferedReader br = null;
-        try{
+        try {
             br = new BufferedReader(new FileReader(filePath));
             return callback.doSomethingWithReader(br);
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             System.out.println(e.getMessage());
             throw e;
-        }
-        finally {
-            if(br != null) {
-                try{ br.close();}
-                catch(IOException e){System.out.println(e.getMessage());}
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
     }
 
-    public <T> T lineReadTemplate(String filePath, LineCallback<T> callback, T initVal) throws IOException{
+    public <T> T lineReadTemplate(String filePath, LineCallback<T> callback, T initVal) throws IOException {
         BufferedReader br = null;
-        try{
+        try {
             br = new BufferedReader(new FileReader(filePath));
             T res = initVal;
             String line = null;
-            while((line = br.readLine())!=null)
-                res = callback.doSomethingWithLine(line,res);
+            while ((line = br.readLine()) != null)
+                res = callback.doSomethingWithLine(line, res);
             return res;
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             System.out.println(e.getMessage());
             throw e;
-        }
-        finally {
-            if(br != null) {
-                try{ br.close();}
-                catch(IOException e){System.out.println(e.getMessage());}
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
     }
 
-    public Integer calcSum(final String filePath) throws IOException{
+    public Integer calcSum(final String filePath) throws IOException {
         return fileReadTemplate(filePath,
                 new BufferedReaderCallback() {
                     @Override
                     public Integer doSomethingWithReader(BufferedReader br) throws IOException {
                         Integer sum = 0;
                         String line;
-                        while((line = br.readLine())!=null)
+                        while ((line = br.readLine()) != null)
                             sum += Integer.valueOf(line);
                         return sum;
                     }
@@ -64,19 +66,19 @@ public class Calculator {
         LineCallback<Integer> multiplyCallback = new LineCallback<Integer>() {
             @Override
             public Integer doSomethingWithLine(String line, Integer value) {
-                return value*Integer.valueOf(line);
+                return value * Integer.valueOf(line);
             }
         };
-        return lineReadTemplate(filePath,multiplyCallback,1);
+        return lineReadTemplate(filePath, multiplyCallback, 1);
     }
 
     public String concatenate(final String filePath) throws IOException {
         LineCallback<String> concatenateCallback = new LineCallback<String>() {
             @Override
             public String doSomethingWithLine(String line, String value) {
-                return value+line;
+                return value + line;
             }
         };
-        return lineReadTemplate(filePath,concatenateCallback,"");
+        return lineReadTemplate(filePath, concatenateCallback, "");
     }
 }

@@ -1,7 +1,5 @@
 package com.jwh.toby.ch3.ch3_2.dao;
 
-import com.jwh.toby.ch3.ch3_2.dao.StatementStrategy;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

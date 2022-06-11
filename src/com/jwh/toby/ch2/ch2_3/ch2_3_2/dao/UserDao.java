@@ -50,7 +50,7 @@ public class UserDao {
         return user;
     }
 
-    public void deleteAll() throws SQLException{
+    public void deleteAll() throws SQLException {
         Connection conn = dataSource.getConnection();
 
         PreparedStatement ps = conn
@@ -61,7 +61,7 @@ public class UserDao {
         conn.close();
     }
 
-    public int getCount() throws SQLException{
+    public int getCount() throws SQLException {
         Connection conn = dataSource.getConnection();
 
         PreparedStatement ps = conn

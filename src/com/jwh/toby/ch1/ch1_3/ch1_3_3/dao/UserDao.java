@@ -11,7 +11,7 @@ public class UserDao {
     private final ConnectionMaker connectionMaker;
 
     //외부에서 종속성을 주입받게 변경
-    public UserDao(ConnectionMaker connectionMaker){
+    public UserDao(ConnectionMaker connectionMaker) {
         this.connectionMaker = connectionMaker;
     }
 

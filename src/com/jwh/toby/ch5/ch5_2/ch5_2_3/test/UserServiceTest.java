@@ -36,23 +36,23 @@ public class UserServiceTest {
     @Before
     public void setUp() {
         users = Arrays.asList(
-                new User("bumjin","박범진","p1", Level.BASIC, UserLevelUpgradePolicy.MIN_LOGCOUNT_FOR_SILVER-1,0),
-                new User("joytouch","강명성","p2", Level.BASIC, UserLevelUpgradePolicy.MIN_LOGCOUNT_FOR_SILVER,0),
-                new User("erwins","신승한","p3", Level.SILVER,60, UserLevelUpgradePolicy.MIN_RECOMMEND_FOR_GOLD-1),
-                new User("madnite1","이승한","p4", Level.SILVER,60, UserLevelUpgradePolicy.MIN_RECOMMEND_FOR_GOLD),
-                new User("green","오민규","p5", Level.GOLD,Integer.MAX_VALUE, Integer.MAX_VALUE)
+                new User("bumjin", "박범진", "p1", Level.BASIC, UserLevelUpgradePolicy.MIN_LOGCOUNT_FOR_SILVER - 1, 0),
+                new User("joytouch", "강명성", "p2", Level.BASIC, UserLevelUpgradePolicy.MIN_LOGCOUNT_FOR_SILVER, 0),
+                new User("erwins", "신승한", "p3", Level.SILVER, 60, UserLevelUpgradePolicy.MIN_RECOMMEND_FOR_GOLD - 1),
+                new User("madnite1", "이승한", "p4", Level.SILVER, 60, UserLevelUpgradePolicy.MIN_RECOMMEND_FOR_GOLD),
+                new User("green", "오민규", "p5", Level.GOLD, Integer.MAX_VALUE, Integer.MAX_VALUE)
         );
     }
 
     @Test
-    public void bean(){
-        assertThat(this.userService , is(notNullValue()));
+    public void bean() {
+        assertThat(this.userService, is(notNullValue()));
     }
 
     @Test
     public void upgradeLevels() throws Exception {
         userDao.deleteAll();
-        for(User user : users) userDao.add(user);
+        for (User user : users) userDao.add(user);
 
         userService.upgradeLevels();
 
@@ -92,41 +92,41 @@ public class UserServiceTest {
         testUserService.setUserLevelUpgradePolicy(testUserLevelUpgradePolicy);
 
         userDao.deleteAll();
-        for(User user : users)
+        for (User user : users)
             userDao.add(user);
 
-        try{
+        try {
             testUserService.upgradeLevels();
             fail("TestUserServiceException expected");
-        }catch(TestUserServiceException e){
+        } catch (TestUserServiceException e) {
 
         }
 
-        checkLevelUpgraded(users.get(1),false);
+        checkLevelUpgraded(users.get(1), false);
     }
 
-    public void checkLevelUpgraded(User user, boolean upgraded){
+    public void checkLevelUpgraded(User user, boolean upgraded) {
         User userUpdate = userDao.get(user.getId());
-        if(upgraded)
+        if (upgraded)
             assertThat(userUpdate.getLevel(), is(user.getLevel().nextLevel()));
         else
             assertThat(userUpdate.getLevel(), is(user.getLevel()));
     }
 
     static class TestUserServicePolicyGeneral extends UserLevelUpgradePolicyGeneral {
-        private String id;
+        private final String id;
 
-        public TestUserServicePolicyGeneral(String id){
+        public TestUserServicePolicyGeneral(String id) {
             this.id = id;
         }
 
-        public void upgradeLevel(User user){
-            if(user.getId().equals(this.id))
+        public void upgradeLevel(User user) {
+            if (user.getId().equals(this.id))
                 throw new TestUserServiceException();
             super.upgradeLevel(user);
         }
     }
 
-    static class TestUserServiceException extends RuntimeException{
+    static class TestUserServiceException extends RuntimeException {
     }
 }

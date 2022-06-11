@@ -38,7 +38,7 @@ public class UserDao {
         ResultSet rs = ps.executeQuery();
 
         User user = null;
-        if(rs.next()) {
+        if (rs.next()) {
             user = new User();
             user.setId(rs.getString("id"));
             user.setName(rs.getString("name"));
@@ -49,13 +49,13 @@ public class UserDao {
         ps.close();
         conn.close();
 
-        if(user == null)
+        if (user == null)
             throw new EmptyResultDataAccessException(1);
 
         return user;
     }
 
-    public void deleteAll() throws SQLException{
+    public void deleteAll() throws SQLException {
         Connection conn = dataSource.getConnection();
 
         PreparedStatement ps = conn
@@ -66,7 +66,7 @@ public class UserDao {
         conn.close();
     }
 
-    public int getCount() throws SQLException{
+    public int getCount() throws SQLException {
         Connection conn = dataSource.getConnection();
 
         PreparedStatement ps = conn
