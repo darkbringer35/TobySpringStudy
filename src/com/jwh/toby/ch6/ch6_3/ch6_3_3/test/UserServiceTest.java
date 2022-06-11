@@ -3,6 +3,7 @@ package com.jwh.toby.ch6.ch6_3.ch6_3_3.test;
 import com.jwh.toby.ch6.ch6_3.ch6_3_3.dao.UserDao;
 import com.jwh.toby.ch6.ch6_3.ch6_3_3.domain.Level;
 import com.jwh.toby.ch6.ch6_3.ch6_3_3.domain.User;
+import com.jwh.toby.ch6.ch6_3.ch6_3_3.handler.TransactionHandler;
 import com.jwh.toby.ch6.ch6_3.ch6_3_3.service.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import java.lang.reflect.Proxy;
 import java.util.Arrays;
 import java.util.List;
 
@@ -77,9 +79,11 @@ public class UserServiceTest {
         testUserService.setUserDao(userDao);
         testUserService.setUserLevelUpgradePolicy(testUserLevelUpgradePolicy);
 
-        UserServiceTx txUserService = new UserServiceTx();
-        txUserService.setUserService(testUserService);
-        txUserService.setTransactionManager(transactionManager);
+        TransactionHandler txhandler = new TransactionHandler();
+        txhandler.setTarget(testUserService);
+        txhandler.setTransactionManager(transactionManager);
+        txhandler.setPattern("upgradeLevels");
+        UserService txUserService = (UserService) Proxy.newProxyInstance(getClass().getClassLoader(),new Class[]{UserService.class}, txhandler);
 
         userDao.deleteAll();
         for (User user : users)
