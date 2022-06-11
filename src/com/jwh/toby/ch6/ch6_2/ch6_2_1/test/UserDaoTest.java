@@ -140,8 +140,7 @@ public class UserDaoTest {
         user1.setLogin(1000);
         user1.setRecommend(999);
 
-//        int updateCount=userDao.update(user1);
-//        assertThat(1, is(updateCount));
+        userDao.update(user1);
 
         User user1update = userDao.get(user1.getId());
         checkSameUser(user1, user1update);
