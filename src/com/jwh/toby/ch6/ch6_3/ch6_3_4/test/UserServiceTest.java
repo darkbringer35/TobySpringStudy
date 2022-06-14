@@ -1,19 +1,19 @@
-package com.jwh.toby.ch6.ch6_3.ch6_3_3.test;
+package com.jwh.toby.ch6.ch6_3.ch6_3_4.test;
 
-import com.jwh.toby.ch6.ch6_3.ch6_3_3.dao.UserDao;
-import com.jwh.toby.ch6.ch6_3.ch6_3_3.domain.Level;
-import com.jwh.toby.ch6.ch6_3.ch6_3_3.domain.User;
-import com.jwh.toby.ch6.ch6_3.ch6_3_3.handler.TransactionHandler;
-import com.jwh.toby.ch6.ch6_3.ch6_3_3.service.*;
+import com.jwh.toby.ch6.ch6_3.ch6_3_4.dao.UserDao;
+import com.jwh.toby.ch6.ch6_3.ch6_3_4.domain.Level;
+import com.jwh.toby.ch6.ch6_3.ch6_3_4.domain.User;
+import com.jwh.toby.ch6.ch6_3.ch6_3_4.service.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import java.lang.reflect.Proxy;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,7 +26,7 @@ import static org.junit.Assert.fail;
 @ContextConfiguration(locations = "../applicationContext.xml")
 public class UserServiceTest {
     @Autowired
-    UserLevelUpgradePolicy userLevelUpgradePolicy;
+    ApplicationContext context;
     @Autowired
     UserService userService;
     @Autowired
@@ -70,6 +70,7 @@ public class UserServiceTest {
     }
 
     @Test
+    @DirtiesContext
     public void upgradeAllorNothing() throws Exception {
         UserLevelUpgradePolicyGeneral testUserLevelUpgradePolicy = new TestUserServicePolicyGeneral(users.get(3).getId());
         testUserLevelUpgradePolicy.setUserDao(this.userDao);
@@ -79,11 +80,9 @@ public class UserServiceTest {
         testUserService.setUserDao(userDao);
         testUserService.setUserLevelUpgradePolicy(testUserLevelUpgradePolicy);
 
-        TransactionHandler txhandler = new TransactionHandler();
-        txhandler.setTarget(testUserService);
-        txhandler.setTransactionManager(transactionManager);
-        txhandler.setPattern("upgradeLevels");
-        UserService txUserService = (UserService) Proxy.newProxyInstance(getClass().getClassLoader(), new Class[]{UserService.class}, txhandler);
+        TxProxyFactoryBean txProxyFactoryBean = context.getBean("&userService", TxProxyFactoryBean.class);
+        txProxyFactoryBean.setTarget(testUserService);
+        UserService txUserService = (UserService) txProxyFactoryBean.getObject();
 
         userDao.deleteAll();
         for (User user : users)
