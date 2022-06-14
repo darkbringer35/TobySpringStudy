@@ -28,3 +28,4 @@
 - Proxy Pattern
 - Decorator Pattern
 - Dynamic Proxy
+- Factory Bean
