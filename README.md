@@ -29,4 +29,4 @@
 - Decorator Pattern
 - Dynamic Proxy
 - Factory Bean
-- Advice & Point Cut
+- Advice & Pointcut
