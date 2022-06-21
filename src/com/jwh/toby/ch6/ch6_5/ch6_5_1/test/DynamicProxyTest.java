@@ -66,7 +66,7 @@ public class DynamicProxyTest {
 
     @Test
     public void classNamePointcutAdvisor() {
-        NameMatchMethodPointcut classMethodPointcut = new NameMatchMethodPointcut(){
+        NameMatchMethodPointcut classMethodPointcut = new NameMatchMethodPointcut() {
             public ClassFilter getClassFilter() {
                 return new ClassFilter() {
                     @Override
@@ -81,10 +81,12 @@ public class DynamicProxyTest {
         //테스트
         checkAdviced(new HelloTarget(), classMethodPointcut, true);
 
-        class HelloWorld extends HelloTarget{};
+        class HelloWorld extends HelloTarget {
+        }
         checkAdviced(new HelloWorld(), classMethodPointcut, false);
 
-        class HelloToby extends HelloTarget{};
+        class HelloToby extends HelloTarget {
+        }
         checkAdviced(new HelloToby(), classMethodPointcut, true);
     }
 
@@ -94,7 +96,7 @@ public class DynamicProxyTest {
         pfBean.addAdvisor(new DefaultPointcutAdvisor(pointcut, new UppercaseAdvice()));
         Hello proxiedHello = (Hello) pfBean.getObject();
 
-        if(adviced) {
+        if (adviced) {
             assertThat(proxiedHello.sayHello("Toby"), is("HELLO TOBY"));
             assertThat(proxiedHello.sayHi("Toby"), is("HI TOBY"));
             assertThat(proxiedHello.sayThankYou("Toby"), is("Thank You Toby"));

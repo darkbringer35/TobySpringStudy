@@ -17,7 +17,7 @@ public class TransactionAdvice implements MethodInterceptor {
     public Object invoke(MethodInvocation invocation) throws Throwable {
         TransactionStatus status = this.transactionManager.getTransaction(new DefaultTransactionDefinition());
 
-        try{
+        try {
             Object ret = invocation.proceed();
             this.transactionManager.commit(status);
             return ret;

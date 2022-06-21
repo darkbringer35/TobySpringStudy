@@ -5,5 +5,6 @@ import org.springframework.aop.MethodMatcher;
 
 public interface Pointcut {
     ClassFilter getClassFilter();
+
     MethodMatcher getMethodMatcher();
 }
