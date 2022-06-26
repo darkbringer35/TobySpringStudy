@@ -4,6 +4,7 @@
 ## 개선할 사항
 - [x] ch5.1.5 업그레이드 정책 추상화
 - [x] ch6.2 upgradeLevels 테스트를 UserLevelUpgradePolicyTest로 분리
+- [x] ch6.5.2 applicatonContext.xml에 testUserService와 testUserLevelUpgradePolicy 매핑 정보 추가
 - [ ] 주석 작업
 
 ## 핵심 키워드
