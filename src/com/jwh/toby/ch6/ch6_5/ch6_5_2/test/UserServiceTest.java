@@ -3,14 +3,15 @@ package com.jwh.toby.ch6.ch6_5.ch6_5_2.test;
 import com.jwh.toby.ch6.ch6_5.ch6_5_2.dao.UserDao;
 import com.jwh.toby.ch6.ch6_5.ch6_5_2.domain.Level;
 import com.jwh.toby.ch6.ch6_5.ch6_5_2.domain.User;
-import com.jwh.toby.ch6.ch6_5.ch6_5_2.service.*;
+import com.jwh.toby.ch6.ch6_5.ch6_5_2.service.UserLevelUpgradePolicy;
+import com.jwh.toby.ch6.ch6_5.ch6_5_2.service.UserLevelUpgradePolicyGeneral;
+import com.jwh.toby.ch6.ch6_5.ch6_5_2.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -28,10 +29,12 @@ public class UserServiceTest {
     @Autowired
     ApplicationContext context;
 
-    @Autowired @Qualifier(value = "userService")
+    @Autowired
+    @Qualifier(value = "userService")
     UserService userService;
 
-    @Autowired @Qualifier(value = "testUserService")
+    @Autowired
+    @Qualifier(value = "testUserService")
     UserService testUserService;
 
     @Autowired
