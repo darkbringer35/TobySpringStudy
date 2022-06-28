@@ -91,6 +91,11 @@ public class UserServiceTest {
         checkLevelUpgraded(users.get(1), false);
     }
 
+    @Test
+    public void advisorAutoProxyCreator() {
+        assertThat(testUserService, is(java.lang.reflect.Proxy.class));
+    }
+
     public void checkLevelUpgraded(User user, boolean upgraded) {
         User userUpdate = userDao.get(user.getId());
         if (upgraded)

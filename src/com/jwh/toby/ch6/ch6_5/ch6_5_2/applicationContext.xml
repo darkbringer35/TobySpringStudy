@@ -47,7 +47,8 @@
     </bean>
 
     <bean id="testUserLevelUpgradePolicy"
-          class="com.jwh.toby.ch6.ch6_5.ch6_5_2.test.UserServiceTest$TestUserServicePolicyGeneral">
+          class="com.jwh.toby.ch6.ch6_5.ch6_5_2.test.UserServiceTest$TestUserServicePolicyGeneral"
+          parent="userLevelUpgradePolicy">
         <property name="userDao" ref="userDao"/>
         <property name="mailSender" ref="mailSender"/>
     </bean>
