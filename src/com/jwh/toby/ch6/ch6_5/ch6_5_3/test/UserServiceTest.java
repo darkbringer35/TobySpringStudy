@@ -106,6 +106,11 @@ public class UserServiceTest {
                 "com.jwh.toby.ch6.ch6_5.ch6_5_3.pointcut.Target.minus(int, int) " +
                 "throws java.lang.RuntimeException)");
 
+        //다형성이 적용되는거 확인
+//        pointcut.setExpression("execution(public int " +
+//                "com.jwh.toby.ch6.ch6_5.ch6_5_3.pointcut.TargetInterface.minus(int, int) " +
+//                "throws java.lang.RuntimeException)");
+
         //Target.minus()
         assertThat(pointcut.getClassFilter().matches(Target.class) &
                 pointcut.getMethodMatcher().matches(
