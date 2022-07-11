@@ -1,13 +1,13 @@
-package com.jwh.toby.ch6.ch6_5.ch6_5_3.test;
+package com.jwh.toby.ch6.ch6_5.ch6_5_7.test;
 
-import com.jwh.toby.ch6.ch6_5.ch6_5_3.dao.UserDao;
-import com.jwh.toby.ch6.ch6_5.ch6_5_3.domain.Level;
-import com.jwh.toby.ch6.ch6_5.ch6_5_3.domain.User;
-import com.jwh.toby.ch6.ch6_5.ch6_5_3.pointcut.Bean;
-import com.jwh.toby.ch6.ch6_5.ch6_5_3.pointcut.Target;
-import com.jwh.toby.ch6.ch6_5.ch6_5_3.service.UserLevelUpgradePolicy;
-import com.jwh.toby.ch6.ch6_5.ch6_5_3.service.UserLevelUpgradePolicyGeneral;
-import com.jwh.toby.ch6.ch6_5.ch6_5_3.service.UserService;
+import com.jwh.toby.ch6.ch6_5.ch6_5_7.dao.UserDao;
+import com.jwh.toby.ch6.ch6_5.ch6_5_7.domain.Level;
+import com.jwh.toby.ch6.ch6_5.ch6_5_7.domain.User;
+import com.jwh.toby.ch6.ch6_5.ch6_5_7.pointcut.Bean;
+import com.jwh.toby.ch6.ch6_5.ch6_5_7.pointcut.Target;
+import com.jwh.toby.ch6.ch6_5.ch6_5_7.service.UserLevelUpgradePolicy;
+import com.jwh.toby.ch6.ch6_5.ch6_5_7.service.UserLevelUpgradePolicyGeneral;
+import com.jwh.toby.ch6.ch6_5.ch6_5_7.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -103,16 +103,16 @@ public class UserServiceTest {
     public void methodSignaturePointcut() throws SecurityException, NoSuchMethodException {
         AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
         pointcut.setExpression("execution(public int " +
-                "com.jwh.toby.ch6.ch6_5.ch6_5_3.pointcut.Target.minus(int, int) " +
+                "com.jwh.toby.ch6.ch6_5.ch6_5_7.pointcut.Target.minus(int, int) " +
                 "throws java.lang.RuntimeException)");
 
         //다형성이 적용 가능 확인
 //        pointcut.setExpression("execution(public int " +
-//                "com.jwh.toby.ch6.ch6_5.ch6_5_3.pointcut.TargetInterface.minus(int, int) " +
+//                "com.jwh.toby.ch6.ch6_5.ch6_5_7.pointcut.TargetInterface.minus(int, int) " +
 //                "throws java.lang.RuntimeException)");
 
         //Target.minus()
-        assertThat(pointcut.getClassFilter().matches(Target.class) &
+        assertThat(pointcut.getClassFilter().matches(Target.class) &&
                 pointcut.getMethodMatcher().matches(
                         Target.class.getMethod("minus", int.class, int.class), null), is(true));
 
