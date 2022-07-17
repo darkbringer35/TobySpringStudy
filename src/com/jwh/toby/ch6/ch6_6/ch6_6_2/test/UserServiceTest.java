@@ -1,13 +1,13 @@
-package com.jwh.toby.ch6.ch6_5.ch6_5_7.test;
+package com.jwh.toby.ch6.ch6_6.ch6_6_2.test;
 
-import com.jwh.toby.ch6.ch6_5.ch6_5_7.dao.UserDao;
-import com.jwh.toby.ch6.ch6_5.ch6_5_7.domain.Level;
-import com.jwh.toby.ch6.ch6_5.ch6_5_7.domain.User;
-import com.jwh.toby.ch6.ch6_5.ch6_5_7.pointcut.Bean;
-import com.jwh.toby.ch6.ch6_5.ch6_5_7.pointcut.Target;
-import com.jwh.toby.ch6.ch6_5.ch6_5_7.service.UserLevelUpgradePolicy;
-import com.jwh.toby.ch6.ch6_5.ch6_5_7.service.UserLevelUpgradePolicyGeneral;
-import com.jwh.toby.ch6.ch6_5.ch6_5_7.service.UserService;
+import com.jwh.toby.ch6.ch6_6.ch6_6_2.dao.UserDao;
+import com.jwh.toby.ch6.ch6_6.ch6_6_2.domain.Level;
+import com.jwh.toby.ch6.ch6_6.ch6_6_2.domain.User;
+import com.jwh.toby.ch6.ch6_6.ch6_6_2.pointcut.Bean;
+import com.jwh.toby.ch6.ch6_6.ch6_6_2.pointcut.Target;
+import com.jwh.toby.ch6.ch6_6.ch6_6_2.service.UserLevelUpgradePolicy;
+import com.jwh.toby.ch6.ch6_6.ch6_6_2.service.UserLevelUpgradePolicyGeneral;
+import com.jwh.toby.ch6.ch6_6.ch6_6_2.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -103,7 +103,7 @@ public class UserServiceTest {
     public void methodSignaturePointcut() throws SecurityException, NoSuchMethodException {
         AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
         pointcut.setExpression("execution(public int " +
-                "com.jwh.toby.ch6.ch6_5.ch6_5_7.pointcut.Target.minus(int, int) " +
+                "com.jwh.toby.ch6.ch6_6.ch6_6_2.pointcut.Target.minus(int, int) " +
                 "throws java.lang.RuntimeException)");
 
         //Target.minus()
