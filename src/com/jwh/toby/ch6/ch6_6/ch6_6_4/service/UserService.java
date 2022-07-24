@@ -1,0 +1,15 @@
+package com.jwh.toby.ch6.ch6_6.ch6_6_4.service;
+
+import com.jwh.toby.ch6.ch6_6.ch6_6_4.domain.User;
+
+import java.util.List;
+
+public interface UserService {
+    void upgradeLevels();
+
+    void add(User user);
+    User get(String id);
+    List<User> getAll();
+    void deleteAll();
+    void update(User user);
+}

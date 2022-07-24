@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/aop
+                        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+                        http://www.springframework.org/schema/tx
+                        http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/springbook?characterEncoding=UTF-8"/>
+        <property name="username" value="spring"/>
+        <property name="password" value="book"/>
+    </bean>
+
+    <bean id="mailSender" class="com.jwh.toby.ch6.ch6_6.ch6_6_4.service.DummyMailSender">
+    </bean>
+
+    <bean id="userDao" class="com.jwh.toby.ch6.ch6_6.ch6_6_4.dao.UserDaoJdbc">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="userLevelUpgradePolicy" class="com.jwh.toby.ch6.ch6_6.ch6_6_4.service.UserLevelUpgradePolicyGeneral">
+        <property name="userDao" ref="userDao"/>
+        <property name="mailSender" ref="mailSender"/>
+    </bean>
+
+    <bean id="userService" class="com.jwh.toby.ch6.ch6_6.ch6_6_4.service.UserServiceImpl">
+        <property name="userDao" ref="userDao"/>
+        <property name="userLevelUpgradePolicy" ref="userLevelUpgradePolicy"/>
+    </bean>
+
+    <bean id="testUserLevelUpgradePolicy"
+          class="com.jwh.toby.ch6.ch6_6.ch6_6_4.test.UserServiceTest$TestUserServicePolicyGeneral"
+          parent="userLevelUpgradePolicy">
+        <property name="userDao" ref="userDao"/>
+        <property name="mailSender" ref="mailSender"/>
+    </bean>
+
+    <!--  readonly 테스트를 위해 TestUserService로 교체  -->
+    <bean id="testUserService" class="com.jwh.toby.ch6.ch6_6.ch6_6_4.test.UserServiceTest$TestUserService">
+        <property name="userDao" ref="userDao"/>
+        <property name="userLevelUpgradePolicy" ref="testUserLevelUpgradePolicy"/>
+    </bean>
+
+    <!--  local DataSource 트랜잭션  -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--  transactionManager는 트랜잭션 매니저 빈 아이디가 transactionManager라면 생략할 수 있다.  -->
+    <tx:advice id="transactionAdvice">
+        <tx:attributes>
+            <!--  propagation은 REQUIRED가 디폴트라 생략 가능  -->
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:advisor advice-ref="transactionAdvice" pointcut="bean(*Service)"/>
+    </aop:config>
+
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+</beans>
