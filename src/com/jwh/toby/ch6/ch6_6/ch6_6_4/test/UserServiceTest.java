@@ -161,8 +161,9 @@ public class UserServiceTest {
     }
 
     static class TestUserService extends UserServiceImpl {
+        @Override
         public List<User> getAll() {
-            for(User user: super.getAll()) {
+            for (User user : super.getAll()) {
                 super.update(user);
             }
             return null;
@@ -172,6 +173,7 @@ public class UserServiceTest {
     static class TestUserServicePolicyGeneral extends UserLevelUpgradePolicyGeneral {
         private final String id = "madnite1";
 
+        @Override
         public void upgradeLevel(User user) {
             if (user.getId().equals(this.id))
                 throw new TestUserServiceException();

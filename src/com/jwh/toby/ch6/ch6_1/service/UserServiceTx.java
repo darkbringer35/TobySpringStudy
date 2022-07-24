@@ -17,6 +17,7 @@ public class UserServiceTx implements UserService {
         this.transactionManager = transactionManager;
     }
 
+    @Override
     public void upgradeLevels() {
         TransactionStatus status = this.transactionManager.getTransaction(new DefaultTransactionDefinition());
 
@@ -31,6 +32,7 @@ public class UserServiceTx implements UserService {
 
     }
 
+    @Override
     public void add(User user) {
         userService.add(user);
     }

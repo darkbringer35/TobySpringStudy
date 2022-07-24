@@ -110,6 +110,7 @@ public class UserServiceTest {
             this.id = id;
         }
 
+        @Override
         public void upgradeLevel(User user) {
             if (user.getId().equals(this.id))
                 throw new TestUserServiceException();

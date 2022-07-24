@@ -161,6 +161,7 @@ public class UserServiceTest {
     static class TestUserServicePolicyGeneral extends UserLevelUpgradePolicyGeneral {
         private final String id = "madnite1";
 
+        @Override
         public void upgradeLevel(User user) {
             if (user.getId().equals(this.id))
                 throw new TestUserServiceException();
