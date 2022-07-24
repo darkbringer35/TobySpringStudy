@@ -5,6 +5,7 @@
 - [x] ch5.1.5 업그레이드 정책 추상화
 - [x] ch6.2 upgradeLevels 테스트를 UserLevelUpgradePolicyTest로 분리
 - [x] ch6.5.2 applicatonContext.xml에 testUserService와 testUserLevelUpgradePolicy 매핑 정보 추가
+- [x] ch6.6.4 applicatonContext.xml에 readonly 테스트를 위해 testUserService에 UserServiceTest$TestUserService 매핑
 - [ ] 주석 작업
 
 ## 핵심 키워드
@@ -28,6 +29,7 @@
 - Reflection
 - Proxy Pattern
 - Decorator Pattern
-- Dynamic Proxy
+- Dynamic Proxy Pattern
 - Factory Bean
 - Advice & Pointcut
+- transactional
