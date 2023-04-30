@@ -6,10 +6,10 @@ import java.sql.SQLException;
 
 //DB 연결 기능을 담당하는 독립적인 클래스
 public class SimpleConnectionMaker {
-    public Connection makeNewConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver"); // jdbc driver 클래스 동적 로딩
-        Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/springbook?characterEncoding=UTF-8", "spring", "book");
-        return conn;
-    }
+	public Connection makeNewConnection() throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.jdbc.Driver"); // jdbc driver 클래스 동적 로딩
+		Connection conn = DriverManager.getConnection(
+			"jdbc:mysql://localhost:3306/springbook?characterEncoding=UTF-8", "spring", "book");
+		return conn;
+	}
 }

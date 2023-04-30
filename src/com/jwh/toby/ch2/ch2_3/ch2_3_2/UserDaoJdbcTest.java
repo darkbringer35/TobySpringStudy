@@ -2,6 +2,7 @@ package com.jwh.toby.ch2.ch2_3.ch2_3_2;
 
 import com.jwh.toby.ch2.ch2_3.ch2_3_2.dao.UserDao;
 import com.jwh.toby.ch2.ch2_3.ch2_3_2.domain.User;
+
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.springframework.context.ApplicationContext;
@@ -13,29 +14,29 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class UserDaoJdbcTest {
-    @Test
-    public void addAndGet() throws SQLException {
-        ApplicationContext context = new GenericXmlApplicationContext("com/jwh/toby/ch2/ch2_3/ch2_3_2/applicationContext.xml");
-        UserDao userDao = context.getBean("userDao", UserDao.class);
+	@Test
+	public void addAndGet() throws SQLException {
+		ApplicationContext context = new GenericXmlApplicationContext("com/jwh/toby/ch2/ch2_3/ch2_3_2/applicationContext.xml");
+		UserDao userDao = context.getBean("userDao", UserDao.class);
 
-        userDao.deleteAll();
-        assertThat(userDao.getCount(), is(0));
+		userDao.deleteAll();
+		assertThat(userDao.getCount(), is(0));
 
-        User user = new User();
-        user.setId("gyumee");
-        user.setName("박성철");
-        user.setPassword("springno1");
+		User user = new User();
+		user.setId("gyumee");
+		user.setName("박성철");
+		user.setPassword("springno1");
 
-        userDao.add(user);
-        assertThat(userDao.getCount(), is(1));
+		userDao.add(user);
+		assertThat(userDao.getCount(), is(1));
 
-        User user2 = userDao.get(user.getId());
+		User user2 = userDao.get(user.getId());
 
-        assertThat(user2.getName(), is(user.getName()));
-        assertThat(user2.getPassword(), is(user.getPassword()));
-    }
+		assertThat(user2.getName(), is(user.getName()));
+		assertThat(user2.getPassword(), is(user.getPassword()));
+	}
 
-    public static void main(String[] args) {
-        JUnitCore.main("com.jwh.toby.ch2.ch2_3.ch2_3_2.UserDaoTest");
-    }
+	public static void main(String[] args) {
+		JUnitCore.main("com.jwh.toby.ch2.ch2_3.ch2_3_2.UserDaoTest");
+	}
 }

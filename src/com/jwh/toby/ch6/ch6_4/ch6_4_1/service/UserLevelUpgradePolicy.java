@@ -3,12 +3,12 @@ package com.jwh.toby.ch6.ch6_4.ch6_4_1.service;
 import com.jwh.toby.ch6.ch6_4.ch6_4_1.domain.User;
 
 public interface UserLevelUpgradePolicy {
-    int MIN_LOGCOUNT_FOR_SILVER = 50;
-    int MIN_RECOMMEND_FOR_GOLD = 30;
+	int MIN_LOGCOUNT_FOR_SILVER = 50;
+	int MIN_RECOMMEND_FOR_GOLD = 30;
 
-    boolean canUpgradeLevel(User user);
+	boolean canUpgradeLevel(User user);
 
-    void upgradeLevel(User user);
+	void upgradeLevel(User user);
 
-    void sendUpgradeEmail(User user);
+	void sendUpgradeEmail(User user);
 }

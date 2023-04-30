@@ -1,23 +1,24 @@
 package com.jwh.toby.ch6.ch6_7.ch6_7_2.service;
 
 import com.jwh.toby.ch6.ch6_7.ch6_7_2.domain.User;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Transactional  //<tx:method name="*"/>과 같은 설정
 public interface UserService {
-    void add(User user);
+	void add(User user);
 
-    void deleteAll();
+	void deleteAll();
 
-    void update(User user);
+	void update(User user);
 
-    void upgradeLevels();
+	void upgradeLevels();
 
-    @Transactional(readOnly = true)
-    User get(String id);
+	@Transactional(readOnly = true)
+	User get(String id);
 
-    @Transactional(readOnly = true)
-    List<User> getAll();
+	@Transactional(readOnly = true)
+	List<User> getAll();
 }

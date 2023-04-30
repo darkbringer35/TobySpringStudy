@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DeleteAllStatement implements StatementStrategy {
-    @Override
-    public PreparedStatement makePreparedStatememt(Connection c) throws SQLException {
-        return c.prepareStatement("DELETE FROM users");
-    }
+	@Override
+	public PreparedStatement makePreparedStatememt(Connection c) throws SQLException {
+		return c.prepareStatement("DELETE FROM users");
+	}
 }

@@ -8,25 +8,25 @@ import com.jwh.toby.ch1.ch1_4.ch1_4_2.domain.User;
 import java.sql.SQLException;
 
 public class UserDaoTest {
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        DaoFactory daoFactory = new DaoFactory();
-        UserDao userDao = daoFactory.userDao();
-        MessageDao messsageDao = daoFactory.messageDao();
+	public static void main(String[] args) throws SQLException, ClassNotFoundException {
+		DaoFactory daoFactory = new DaoFactory();
+		UserDao userDao = daoFactory.userDao();
+		MessageDao messsageDao = daoFactory.messageDao();
 
-        User user = new User();
-        user.setId("whiteship");
-        user.setName("백기선");
-        user.setPassword("married");
+		User user = new User();
+		user.setId("whiteship");
+		user.setName("백기선");
+		user.setPassword("married");
 
-        userDao.add(user);
+		userDao.add(user);
 
-        System.out.println(user.getId() + " 등록 성공");
+		System.out.println(user.getId() + " 등록 성공");
 
-        User user2 = userDao.get(user.getId());
-        System.out.println(user2.getName());
-        System.out.println(user2.getPassword());
+		User user2 = userDao.get(user.getId());
+		System.out.println(user2.getName());
+		System.out.println(user2.getPassword());
 
-        System.out.println(user2.getId() + " 조회 성공");
+		System.out.println(user2.getId() + " 조회 성공");
 
-    }
+	}
 }
